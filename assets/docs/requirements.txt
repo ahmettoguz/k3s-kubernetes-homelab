@@ -1,0 +1,35 @@
+Installation Project: Rancher Kubernetes K3S Management Server
+
+* Install a Rancher server
+* Both Rancher and Kubernetes services should be high available.
+Shutdown of one VM, shouldn't disrupt the service.
+* Use K3S for Kubernetes engine.
+* Choose any container image. This container image should be deployed
+as 2 different instances. Incoming requests to www.bugday.org should be
+shared among these instances. Both instances should serve this domain.
+* Choose another container image. This image should be deployed as 1
+instance. Incoming requests to www.ctis486.com should be served by this
+instance.
+* Users should be able connect to containers over HTTPS (self-signed is
+sufficent). However containers itself should only offer HTTP service.
+
+Additional questions for you to find the answers to (will be asked
+during presentation):
+* How can one view the logs of the application running inside the
+container?
+* If the application running inside the container uses web sessions and
+the application runs on multiple instances, how can you ensure the
+session's not broken in consecutive requests?
+
+In case of a reboot, the system's related services should automatically
+start and work seamlessly without any manual intervention.
+
+You're expected to use the best practices of Linux system
+administration (e.g: install only the packages needed for the service,
+use package management, adhere to FHS, use systemd, configure firewall,
+etc.).
+
+Additional questions should be answered as an addendum to your
+documentation. Some of them may not have straightforward answers or
+solutions, in those cases theorize and share your thoughts on the
+subject.
