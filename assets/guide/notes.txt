@@ -1,0 +1,7 @@
+------------------------------------------------------------------ SSH connection
+ssh -p 3023 ahmet@localhost
+ssh -p 3024 ahmet@localhost
+ssh -p 3025 ahmet@localhost
+ahmet
+su 
+toor
