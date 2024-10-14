@@ -1,0 +1,10 @@
+------------------------------------------------------------------ Check Package 
+find / -name ufw
+
+------------------------------------------------------------------ Add sbin to path
+// add to path because cannot find ufw
+export PATH=$PATH:/usr/sbin
+
+// or add that at the end of the bashrc file
+nano ~/.bashrc
+export PATH=$PATH:/usr/sbin

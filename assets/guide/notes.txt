@@ -1,7 +1,39 @@
 ------------------------------------------------------------------ SSH connection
-ssh -p 3023 ahmet@localhost
-ssh -p 3024 ahmet@localhost
-ssh -p 3025 ahmet@localhost
-ahmet
-su 
-toor
+    s3k-1
+    ssh ahmet@139.179.104.156
+    ping 139.179.104.156
+
+    s3k-2
+    ssh ahmet@139.179.104.157
+    ping 139.179.104.157
+
+    s3k-3
+    ssh ahmet@139.179.104.158
+    ping 139.179.104.158
+
+    s3k-4
+    ssh ahmet@139.179.104.166
+    ping 139.179.104.166
+
+    ahmet
+    su
+    toor
+    exit
+
+------------------------------------------------------------------ Update
+    apt update
+    apt upgrade
+
+------------------------------------------------------------------ Allow firewall
+    apt install ufw -y
+
+    ufw status
+    ufw enable
+
+    ufw allow ssh
+    ufw allow 80/tcp
+    ufw allow 80/tcp
+    ufw allow 443/tcp
+    ufw allow 6443/tcp
+
+------------------------------------------------------------------ 
