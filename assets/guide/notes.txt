@@ -16,9 +16,10 @@
     ping 139.179.104.166
 
     ahmet
-    su
+    su -
     toor
     exit
+    clear
 
 ------------------------------------------------------------------ Update
     apt update
@@ -28,6 +29,7 @@
     apt install ufw -y
 
     ufw status
+    ufw disable
     ufw enable
 
     ufw allow ssh
@@ -36,4 +38,47 @@
     ufw allow 443/tcp
     ufw allow 6443/tcp
 
------------------------------------------------------------------- 
+    ufw default allow incoming
+    ufw default allow outgoing
+
+------------------------------------------------------------------ installation curl
+apt install curl -y
+curl
+
+------------------------------------------------------------------ installation of k3s
+s3k-1
+curl -sfL https://get.k3s.io | K3S_TOKEN=MTOKEN sh -s - server --cluster-init 
+
+s3k-2
+curl -sfL https://get.k3s.io | K3S_TOKEN=MTOKEN sh -s - server --server https://139.179.104.156:6443
+
+s3k-3, s3k-4
+curl -sfL https://get.k3s.io | K3S_TOKEN=MTOKEN sh -s - agent --server https://139.179.104.156:6443
+
+------------------------------------------------------------------ check cluster
+kubectl get nodes
+kubectl get pods --all-namespaces
+kubectl get pods
+kubectl get pods -o wide --all-namespaces
+
+
+------------------------------------------------------------------ check service
+systemctl status k3s.service
+systemctl status k3s
+systemctl restart k3s
+
+------------------------------------------------------------------ remove from cluster
+k3s-1
+kubectl delete node k3s-4
+
+------------------------------------------------------------------ delete k3s from being node
+server
+/usr/local/bin/k3s-uninstall.sh
+agent
+/usr/local/bin/k3s-agent-uninstall.sh
+
+------------------------------------------------------------------
+
+cat /etc/rancher/k3s/k3s.yaml
+clear
+1. nodu düşürdüm ve kubectl get nodes 2. node da çalışmadı.???
