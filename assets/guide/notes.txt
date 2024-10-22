@@ -1,15 +1,17 @@
 ------------------------------------------------------------------ SSH connection
     s3k-1
-    ssh ahmet@192.168.18.214
-    ping 192.168.18.214
+    ssh ahmet@s3k-1
+    ssh ahmet@139.179.104.206
+    ping 139.179.104.206
 
     s3k-2
-    ssh ahmet@169.254.6.253
-    ping 169.254.6.253
+    ssh ahmet@s3k-2
+    ssh ahmet@139.179.104.157
+    ping 139.179.104.157
 
     s3k-3
-    ssh ahmet@169.254.6.239
-    ping 169.254.6.239
+    ssh ahmet@139.179.104.158
+    ping 139.179.104.158
 
     s3k-4
     ssh ahmet@169.254.6.11
@@ -61,22 +63,25 @@
     kubectl get pods
     kubectl get pods -o wide --all-namespaces
 
+    clear
 ------------------------------------------------------------------ check service
     systemctl status k3s.service
     systemctl status k3s
     systemctl restart k3s
 
+    clear
 ------------------------------------------------------------------ remove from cluster
     k3s-1
     kubectl delete node k3s-4
 
+    clear
 ------------------------------------------------------------------ delete k3s from being node
-    server
+    for server
     /usr/local/bin/k3s-uninstall.sh
-    agent
+
+    for agent
     /usr/local/bin/k3s-agent-uninstall.sh
 
+    clear
 ------------------------------------------------------------------
 cat /etc/rancher/k3s/k3s.yaml
-clear
-1. nodu düşürdüm ve kubectl get nodes 2. node da çalışmadı.???

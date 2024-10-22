@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mdeployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mdeployment
+  template:
+    metadata:
+      labels:
+        app: mdeployment
+    spec:
+      containers:
+      - name: whoami-c
+        image: traefik/whoami
+        ports:
+        - containerPort: 80
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mservice
+spec:
+  type: NodePort
+  ports:
+    - port: 80
+      targetPort: 80
+      nodePort: 30001  # Change this to any port number between 30000-32767
+  selector:
+    app: mdeployment
