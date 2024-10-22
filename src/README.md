@@ -7,6 +7,11 @@ kubectl delete deployment app
 kubectl delete service app
 
 ------------------------------------------------------------------ monitor
+kubectl get nodes -o wide --all-namespaces
+kubectl get pods -o wide --all-namespaces
+
+kubectl get pods -o wide --all-namespaces | grep mdeployment
+
 kubectl get deployments
 kubectl get pods
 kubectl get services
