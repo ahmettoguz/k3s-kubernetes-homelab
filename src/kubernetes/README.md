@@ -14,6 +14,8 @@ kubectl apply -f app.yml
 ```
 kubectl delete -f app.yml
 
+kubectl delete namespace mnamespace
+
 kubectl delete deployment app
 kubectl delete service app
 
@@ -22,9 +24,9 @@ shutdown now
 
 ### check status
 ```
-kubectl get nodes -o wide --all-namespaces
-
 kubectl get pods -n mnamespace -o wide
+
+kubectl get nodes -o wide --all-namespaces
 
 kubectl describe node k3s-4
 kubectl logs -n mnamespace mdeployment-6c9584c8d4-phq6q
