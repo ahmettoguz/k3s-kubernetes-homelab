@@ -9,7 +9,6 @@ clear
 
 ---
 run kubernetes
-activate secret
 activate ingress
 
 ### Client Request with CMD

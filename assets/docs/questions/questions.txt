@@ -1,0 +1,17 @@
+Q1) How can one view the logs of the application running inside the container?
+Answer:
+// todo
+
+----------------------------------------------------------------------------
+
+Q2) If the application running inside the container uses web sessions and the application runs on multiple instances, how can you ensure the session's not broken in consecutive requests?
+Answer:
+
+Main aim of the session is storing user's temporary information in a file which keep on service.
+With the help of the session and cookie authentication and additional informations provided as persistent between different http requests.
+Tokens (generally jwt) are recommended solutions for micro service architecture instead of sessions.
+But if the system is implemented with sessions in micro service architecture some modification needed as session files stored in services and each requests distributed among services.
+Redis is seem one of the best solution for distributed session management.
+With Redis Cluster there are Redis nodes and these nodes split dataset among these multiple nodes. So services communicate with that redis nodes to get the session data.
+
+----------------------------------------------------------------------------
