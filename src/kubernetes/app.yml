@@ -36,6 +36,6 @@ spec:
   ports:
     - port: 80
       targetPort: 80
-      nodePort: 30001  # Change this to any port number between 30000-32767
+      nodePort: 30001
   selector:
     app: mdeployment
