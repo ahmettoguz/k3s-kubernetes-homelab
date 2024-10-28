@@ -1,7 +1,14 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: mnamespace
+---
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: mdeployment
+  namespace: mnamespace
 spec:
   replicas: 3
   selector:
@@ -17,12 +24,13 @@ spec:
         image: traefik/whoami
         ports:
         - containerPort: 80
-
 ---
+
 apiVersion: v1
 kind: Service
 metadata:
   name: mservice
+  namespace: mnamespace
 spec:
   type: NodePort
   ports:

@@ -1,15 +1,15 @@
 ------------------------------------------------------------------ SSH connection
-.    s3k-1..
+    s3k-1..
     ssh ahmet@192.168.1.137
 
     s3k-2
-    ssh ahmet@139.179.104.184
+    ssh ahmet@192.168.1.150
 
     s3k-3
     ssh ahmet@192.168.1.151
 
     s3k-4
-    ssh ahmet@139.179.104.188
+    ssh ahmet@192.168.1.152
 
     ahmet
     su -
@@ -39,13 +39,15 @@
 
 ------------------------------------------------------------------ installation of k3s
     s3k-1
-    curl -sfL https://get.k3s.io | K3S_TOKEN=MTOKEN sh -s - server --cluster-init 
+    curl -sfL https://get.k3s.io | K3S_TOKEN=MTOKEN sh -s - server --cluster-init
+    curl -sfL https://get.k3s.io | K3S_TOKEN=MTOKEN sh -s - server --cluster-init --node-taint role=master:NoSchedule
 
     s3k-2
-    curl -sfL https://get.k3s.io | K3S_TOKEN=MTOKEN sh -s - server --server https://139.179.104.206:6443
+    curl -sfL https://get.k3s.io | K3S_TOKEN=MTOKEN sh -s - server --server https://192.168.1.137:6443
+    curl -sfL https://get.k3s.io | K3S_TOKEN=MTOKEN sh -s - server --node-taint role=master:NoSchedule --server https://192.168.1.137:6443
 
     s3k-3, s3k-4
-    curl -sfL https://get.k3s.io | K3S_TOKEN=MTOKEN sh -s - agent --server https://139.179.104.206:6443
+    curl -sfL https://get.k3s.io | K3S_TOKEN=MTOKEN sh -s - agent --server https://192.168.1.137:6443
 
 ------------------------------------------------------------------ check cluster
     kubectl get nodes
@@ -66,18 +68,18 @@
 
     clear
 
------------------------------------------------------------------- remove from cluster
-    k3s-1
-    kubectl delete node k3s-4
-
-    clear
-
 ------------------------------------------------------------------ delete k3s from being node
     for server
     /usr/local/bin/k3s-uninstall.sh
 
     for agent
     /usr/local/bin/k3s-agent-uninstall.sh
+
+    clear
+
+------------------------------------------------------------------ remove from cluster
+    k3s-1
+    kubectl delete node k3s-4
 
     clear
 
