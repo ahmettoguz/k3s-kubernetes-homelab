@@ -1,19 +1,15 @@
 ------------------------------------------------------------------ SSH connection
-    s3k-1
-    ssh ahmet@139.179.104.206
-    ping 139.179.104.206
+.    s3k-1..
+    ssh ahmet@192.168.1.137
 
     s3k-2
     ssh ahmet@139.179.104.184
-    ping 139.179.104.184
 
     s3k-3
-    ssh ahmet@139.179.104.186
-    ping 139.179.104.186
+    ssh ahmet@192.168.1.151
 
     s3k-4
     ssh ahmet@139.179.104.188
-    ping 139.179.104.188
 
     ahmet
     su -
@@ -41,10 +37,6 @@
     ufw default allow incoming
     ufw default allow outgoing
 
------------------------------------------------------------------- installation curl
-    apt install curl -y
-    curl
-
 ------------------------------------------------------------------ installation of k3s
     s3k-1
     curl -sfL https://get.k3s.io | K3S_TOKEN=MTOKEN sh -s - server --cluster-init 
@@ -59,9 +51,11 @@
     kubectl get nodes
     kubectl get nodes -o wide --all-namespaces
 
-    kubectl get pods --all-namespaces
     kubectl get pods
     kubectl get pods -o wide --all-namespaces
+
+    journalctl -u k3s -f 
+    journalctl -u k3s -f | grep error
 
     clear
 
@@ -86,13 +80,9 @@
     /usr/local/bin/k3s-agent-uninstall.sh
 
     clear
-    
------------------------------------------------------------------- clone git repo
-apt install git
-
-git clone https://github.com/ahmettoguz/rancher-k3s-kubernetes.git
-ahmettoguz
 
 ------------------------------------------------------------------ 
 
 cat /etc/rancher/k3s/k3s.yaml
+
+clear
