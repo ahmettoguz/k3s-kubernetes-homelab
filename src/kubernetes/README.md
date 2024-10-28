@@ -1,14 +1,26 @@
------------------------------------------------------------------- run
-kubectl apply -f app.yml
+# rancher-k3s-kubernetes
 
------------------------------------------------------------------- stop
+### navigate
+```
+cd ~/rancher-k3s-kubernetes/src/kubernetes
+```
+
+### apply kubernetes
+```
+kubectl apply -f app.yml
+```
+
+### remove kubernetes
+```
 kubectl delete -f app.yml
 kubectl delete deployment app
 kubectl delete service app
 
 shutdown now
+```
 
------------------------------------------------------------------- monitor
+### check status
+```
 kubectl get nodes -o wide --all-namespaces
 kubectl get pods -n mnamespace -o wide
 
@@ -22,6 +34,4 @@ kubectl get pods -n mnamespace
 kubectl get services -n mnamespace
 
 clear
-
-------------------------------------------------------------------
-
+```
