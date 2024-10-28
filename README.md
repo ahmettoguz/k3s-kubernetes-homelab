@@ -1,26 +1,26 @@
 # rancher-k3s-kubernetes
 
-### Client Request with CMD
-
+### check nodes
 ```
-curl -s http://192.168.1.137:30001
-curl -s http://192.168.1.150:30001
-curl -s http://192.168.1.151:30001
-curl -s http://192.168.1.152:30001
+kubectl get nodes -o wide --all-namespaces
+kubectl describe node k3s-4
+clear
 ```
-
-```
-curl -s www.bugday.org
-curl -s http://www.bugday.org
-curl -s -k https://www.bugday.org
-```
-
-```
-cls
-```
-
 
 ---
 run kubernetes
 activate secret
 activate ingress
+
+### Client Request with CMD
+
+```
+curl -s -k https://www.bugday.org
+curl -s -k https://www.ctis486.com
+
+
+curl -s www.bugday.org
+curl -s http://www.bugday.org
+
+cls
+```
