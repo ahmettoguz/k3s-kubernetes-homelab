@@ -12,7 +12,7 @@ curl -s http://192.168.1.152:30001
 ```
 curl -s www.bugday.org
 curl -s http://www.bugday.org
-curl -s https://www.bugday.org
+curl -s -k https://www.bugday.org
 ```
 
 ```

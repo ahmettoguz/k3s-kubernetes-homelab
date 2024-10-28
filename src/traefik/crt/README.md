@@ -7,12 +7,12 @@ cd ~/rancher-k3s-kubernetes/src/traefik/crt
 
 ### create secret
 ```
-kubectl create secret tls my-tls-secret --cert=./selfsigned.crt --key=./selfsigned.key -n mnamespace
+kubectl create secret tls mtls --cert=./selfsigned.crt --key=./selfsigned.key -n mnamespace
 ```
 
 ### remove secret
 ```
-kubectl delete secret my-tls-secret -n mnamespace
+kubectl delete secret mtls -n mnamespace
 ```
 
 ### get secrets

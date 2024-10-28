@@ -13,6 +13,7 @@ kubectl apply -f app.yml
 ### remove kubernetes
 ```
 kubectl delete -f app.yml
+
 kubectl delete deployment app
 kubectl delete service app
 

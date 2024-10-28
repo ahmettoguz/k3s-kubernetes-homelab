@@ -9,7 +9,7 @@ spec:
   tls:
   - hosts:
     - www.bugday.org
-    secretName: my-tls-secret
+    secretName: mtls
   rules:
   - host: www.bugday.org
     http:
