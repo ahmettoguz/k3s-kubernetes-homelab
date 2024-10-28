@@ -54,6 +54,7 @@
             # End of section
 
             139.179.104.206 s3k-1
+            139.179.104.206 www.bugday.org
 
 ------------------------------------------------------------------ git persistent credentials
 git config --global credential.helper store
