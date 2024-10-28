@@ -1,15 +1,20 @@
 Installation Project: Rancher Kubernetes K3S Management Server
 
 * Install a Rancher server
+
 * Both Rancher and Kubernetes services should be high available.
+
 Shutdown of one VM, shouldn't disrupt the service.
 * Use K3S for Kubernetes engine.
+
 * Choose any container image. This container image should be deployed
 as 2 different instances. Incoming requests to www.bugday.org should be
 shared among these instances. Both instances should serve this domain.
+
 * Choose another container image. This image should be deployed as 1
 instance. Incoming requests to www.ctis486.com should be served by this
 instance.
+
 * Users should be able connect to containers over HTTPS (self-signed is
 sufficent). However containers itself should only offer HTTP service.
 

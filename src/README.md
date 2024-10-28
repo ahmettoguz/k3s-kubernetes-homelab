@@ -8,7 +8,8 @@ kubectl delete service app
 
 ------------------------------------------------------------------ monitor
 kubectl get nodes -o wide --all-namespaces
-kubectl get pods -o wide --all-namespaces
+kubectl get pods -n mnamespace -o wide
+
 
 kubectl get pods -o wide --all-namespaces | grep mdeployment
 
