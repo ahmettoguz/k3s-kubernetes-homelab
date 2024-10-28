@@ -18,3 +18,9 @@ curl -s https://www.bugday.org
 ```
 cls
 ```
+
+
+---
+run kubernetes
+activate secret
+activate ingress
