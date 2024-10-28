@@ -22,6 +22,7 @@ shutdown now
 ### check status
 ```
 kubectl get nodes -o wide --all-namespaces
+
 kubectl get pods -n mnamespace -o wide
 
 kubectl describe node k3s-4
