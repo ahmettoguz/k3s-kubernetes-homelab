@@ -2,7 +2,7 @@
 
 ### navigate
 ```
-cd ~/rancher-k3s-kubernetes/src/kubernetes
+cd root/rancher-k3s-kubernetes/src/kubernetes
 ```
 
 ### check pods
