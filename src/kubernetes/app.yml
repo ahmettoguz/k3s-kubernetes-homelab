@@ -39,6 +39,7 @@ spec:
   ports:
     - port: 80
       targetPort: 80
+      nodePort: 30001
   selector:
     app: mdeployment
 ---
@@ -77,5 +78,6 @@ spec:
   ports:
     - port: 80
       targetPort: 80
+      nodePort: 30002
   selector:
     app: nginx
