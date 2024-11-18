@@ -4,16 +4,20 @@
 
 #### Connect VM
     s3k-1
-    ssh root@192.168.1.21
+    ssh -p 3021 root@localhost
+    ssh root@192.168.56.31
 
     s3k-2
-    ssh root@192.168.1.22
+    ssh -p 3022 root@localhost
+    ssh root@192.168.56.32
 
     s3k-3
-    ssh root@192.168.1.23
+    ssh -p 3023 root@localhost
+    ssh root@192.168.56.33
 
     s3k-4
-    ssh root@192.168.1.24
+    ssh -p 3024 root@localhost
+    ssh root@192.168.56.34
 
     toor
     exit
