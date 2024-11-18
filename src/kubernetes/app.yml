@@ -35,7 +35,7 @@ metadata:
   name: mservice
   namespace: mnamespace
 spec:
-  type: ClusterIP
+  type: NodePort
   ports:
     - port: 80
       targetPort: 80
@@ -73,7 +73,7 @@ metadata:
   name: nservice
   namespace: mnamespace
 spec:
-  type: ClusterIP
+  type: NodePort
   ports:
     - port: 80
       targetPort: 80
