@@ -1,11 +1,9 @@
-# namespace as mnamespace
 apiVersion: v1
 kind: Namespace
 metadata:
   name: mnamespace
 ---
 
-# mdeployment
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -28,54 +26,16 @@ spec:
         - containerPort: 80
 ---
 
-# mservice
 apiVersion: v1
 kind: Service
 metadata:
   name: mservice
   namespace: mnamespace
 spec:
-  type: ClusterIP
+  type: NodePort
   ports:
     - port: 80
       targetPort: 80
+      nodePort: 30001  # Change this to any port number between 30000-32767
   selector:
     app: mdeployment
----
-
-# ndeployment
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: ndeployment
-  namespace: mnamespace
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: nginx
-  template:
-    metadata:
-      labels:
-        app: nginx
-    spec:
-      containers:
-      - name: nginx
-        image: nginx:latest
-        ports:
-        - containerPort: 80
----
-
-# nservice
-apiVersion: v1
-kind: Service
-metadata:
-  name: nservice
-  namespace: mnamespace
-spec:
-  type: ClusterIP
-  ports:
-    - port: 80
-      targetPort: 80
-  selector:
-    app: nginx
