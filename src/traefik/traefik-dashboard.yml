@@ -1,19 +1,17 @@
-apiVersion: networking.k8s.io/v1
-kind: Ingress
+apiVersion: helm.cattle.io/v1
+kind: HelmChartConfig
 metadata:
-  name: traefik-ingress
+  name: traefik
   namespace: kube-system
-  annotations:
-    spec.ingressClassName: traefik
 spec:
-  rules:
-    - host: traefik.ctistraefik.com
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: traefik-dashboard
-                port:
-                  number: 9000
+  valuesContent: |-
+    additionalArguments:
+      - "--api"
+      - "--api.dashboard=true"
+      - "--api.insecure=true"
+    ports:
+      traefik:
+        expose: true
+    providers:
+      kubernetesCRD:
+        allowCrossNamespace: true
