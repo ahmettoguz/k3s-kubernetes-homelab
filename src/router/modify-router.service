@@ -1,0 +1,11 @@
+[Unit]
+Description=Modify flannel routes
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart= /root/rancher-k3s-kubernetes/src/router/modify-router.sh
+
+[Install]
+WantedBy=multi-user.target
