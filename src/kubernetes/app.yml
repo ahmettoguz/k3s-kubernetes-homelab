@@ -35,11 +35,10 @@ metadata:
   name: mservice
   namespace: mnamespace
 spec:
-  type: NodePort
+  type: ClusterIP
   ports:
     - port: 80
       targetPort: 80
-      nodePort: 30001
   selector:
     app: mdeployment
 ---
@@ -74,10 +73,9 @@ metadata:
   name: nservice
   namespace: mnamespace
 spec:
-  type: NodePort
+  type: ClusterIP
   ports:
     - port: 80
       targetPort: 80
-      nodePort: 30002
   selector:
     app: nginx
