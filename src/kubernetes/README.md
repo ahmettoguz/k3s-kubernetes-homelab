@@ -1,8 +1,8 @@
-# rancher-k3s-kubernetes
+# k3s-kubernetes-homelab
 
 ### navigate
 ```
-cd root/rancher-k3s-kubernetes/src/kubernetes
+cd root/k3s-kubernetes-homelab/src/kubernetes
 ```
 
 ### check pods
