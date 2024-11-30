@@ -1,6 +1,6 @@
 # k3s-kubernetes-homelab
 
-Create 4 VMs as k3s1 to k3s4
+Create 4 VMs as k3s1 to k3s4.
 
 ### SSH
 Configure `/etc/ssh/sshd_config` to be able to login as root.
