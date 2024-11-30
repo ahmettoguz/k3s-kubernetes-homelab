@@ -26,11 +26,11 @@ kubectl get svc -n kube-system
 
 ### Kubernetes Actions
 ```
-cd /root/rancher-k3s-kubernetes/src/kubernetes
+cd /root/k3s-kubernetes-homelab/src/kubernetes
 kubectl apply -f app.yml
 kubectl delete -f app.yml
 
-cd /root/rancher-k3s-kubernetes/src/traefik
+cd /root/k3s-kubernetes-homelab/src/traefik
 kubectl apply -f ingress.yml
 kubectl delete -f ingress.yml
 ```
@@ -60,4 +60,17 @@ kubectl delete node k3s3
 ### Cert Manager (CRD)
 ```
 kubectl delete -f cert-manager.crds.yaml
+```
+
+<br/>
+
+### Rancher
+```
+kubectl get namespaces
+
+kubectl get deployment -n cattle-system
+kubectl get pods -n cattle-system
+kubectl get svc -n cattle-system
+
+kubectl delete pod rancher-8458c97cfd-cxvdd -n cattle-system --force --grace-period=0
 ```

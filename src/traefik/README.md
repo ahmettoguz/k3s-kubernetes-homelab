@@ -1,8 +1,8 @@
-# rancher-k3s-kubernetes
+# k3s-kubernetes-homelab
 
 ### navigate
 ```
-cd ~/rancher-k3s-kubernetes/src/traefik
+cd ~/k3s-kubernetes-homelab/src/traefik
 ```
 
 ### check ingress
