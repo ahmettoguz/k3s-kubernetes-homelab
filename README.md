@@ -59,18 +59,18 @@ apt install curl git ufw -y
 
 ### Install k3s to Nodes
 These are how installing k3s to nodes. Explanation of the parameters as follows:
-`--node-taint dedicated=master:NoSchedule`: Master node will not schedule application pod.
 `--flannel-backend=none`: Do not install flannel as default.
 `--disable-network-policy`: Do not use network policy which flannel provide.
 
-#### k3s1 (master, server) 
+#### k3s1 (master, server)
+After installation on k3s1 install Calico.
 ```
-curl -sfL https://get.k3s.io | K3S_TOKEN=MTOKEN sh -s - server --cluster-init --node-ip 192.168.56.31 --node-taint dedicated=master:NoSchedule --flannel-backend=none --disable-network-policy
+curl -sfL https://get.k3s.io | K3S_TOKEN=MTOKEN sh -s - server --cluster-init --node-ip 192.168.56.31 --flannel-backend=none --disable-network-policy
 ```    
 
 ##### k3s-2 (master, server)
 ```
-curl -sfL https://get.k3s.io | K3S_TOKEN=MTOKEN sh -s - server --server https://192.168.56.31:6443 --node-ip 192.168.56.32 --node-taint dedicated=master:NoSchedule --flannel-backend=none --disable-network-policy
+curl -sfL https://get.k3s.io | K3S_TOKEN=MTOKEN sh -s - server --server https://192.168.56.31:6443 --node-ip 192.168.56.32 --flannel-backend=none --disable-network-policy
 ```
 
 ##### k3s-3 (worker, agent)
@@ -87,7 +87,7 @@ curl -sfL https://get.k3s.io | K3S_TOKEN=MTOKEN sh -s - agent --server https://1
 -------------------------------------------------------------------------------------------------------------
 
 ### Install Calico
-As flannel cannot handle pod connectivity between different nodes I prefer to use Calico. Lets install Calico.
+As flannel cannot handle pod connectivity between different nodes I prefer to use Calico. Lets install Calico on k3s1.
 ```
 kubectl apply -f https://raw.githubusercontent.com/projectcalico/calico/v3.25.1/manifests/calico.yaml
 ```
@@ -110,10 +110,6 @@ clear
 cd /root/k3s-kubernetes-homelab/src/kubernetes
 kubectl apply -f app.yml
 ```
-
-clear
-<br/>
--------------------------------------------------------------------------------------------------------------
 
 ### Activate Ingress
 ```
@@ -204,13 +200,14 @@ http://192.168.1.21:31530
 ```
 <br/>
 
+
 ### Apply Firewall
 
 Allow API server communication (port 6443)
 Allow kubelet read-only API (port 10255)
 Allow communication between kubelet and master node (port 10250)
 Allow kube-proxy (port 10256)
-Allow CoreDNS DNS resolution (port 53)
+Allow CoreDNS DNS resolution (port 53, 9153)
 Allow etcd (port range 2379-2380)
 Allow NodePort services (port range 30000-32767)
 Allow VXLAN encapsulation (port 4789)
@@ -226,6 +223,7 @@ ufw allow 10255/tcp
 ufw allow 10256/tcp
 ufw allow 53/tcp
 ufw allow 53/udp
+ufw allow 9153/udp
 ufw allow 2379:2380/tcp
 ufw allow 30000:32767/tcp
 ufw allow 4789/udp

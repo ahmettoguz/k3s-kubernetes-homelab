@@ -10,7 +10,7 @@ p
 1
 w
 lsblk
-Format Partiton and Save as Persistent
+
 swapon --show
 mkswap /dev/sdb1
 swapon /dev/sdb1
