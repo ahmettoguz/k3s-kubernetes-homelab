@@ -5,7 +5,8 @@ Wants=network-online.target
 
 [Service]
 Type=oneshot
-ExecStart= /root/rancher-k3s-kubernetes/src/router/modify-router.sh
+ExecStartPre=/bin/sleep 30
+ExecStart=/root/rancher-k3s-kubernetes/src/router/modify-router.sh
 
 [Install]
 WantedBy=multi-user.target
