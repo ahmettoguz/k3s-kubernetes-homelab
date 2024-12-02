@@ -43,7 +43,7 @@ To streamline application deployment and management, I installed Helm. I also us
 
 &nbsp; [![Kubernetes](https://img.shields.io/badge/Kubernetes-3069DE?style=for-the-badge&logo=kubernetes&logoColor=white)](https://kubernetes.io/)
 
-&nbsp; [![K3S](https://img.shields.io/badge/K3S-FFC61C?style=for-the-badge&logo=k3s&logoColor=black)](https://kubernetes.io/)
+&nbsp; [![K3S](https://img.shields.io/badge/K3S-FFC61C?style=for-the-badge&logo=k3s&logoColor=black)](https://k3s.io/)
 
 &nbsp; [![RANCHER](https://img.shields.io/badge/Rancher-0075A8?style=for-the-badge&logo=rancher&logoColor=white)](https://www.rancher.com/)
 
