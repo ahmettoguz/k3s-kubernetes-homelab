@@ -1,99 +1,182 @@
-# k3s-kubernetes-homelab
+<h1 id="top" align="center">K3s Kubernetes Homelab</h1> 
 
-Create 4 VMs as k3s1 to k3s4.
+<br>
 
-### SSH
-Configure `/etc/ssh/sshd_config` to be able to login as root.
+<div align="center">
+    <img height=400 src="assets/banner1.png">
+</div>
+
+<br>
+
+## 🔍 Table of Contents
+
+- [About Project](#intro)
+- [Technologies](#technologies)
+- [Features](#features)
+- [Prerequisites](#prerequisites)
+- [System Startup](#system-startup)
+- [Contributors](#contributors)
+ 
+<br/>
+
+<h2 id="intro">📌 About Project</h2> 
+
+   In this project, I designed and deployed a Kubernetes cluster using K3s, a lightweight Kubernetes distribution. The cluster consists of four virtual machines (VMs), including two master nodes and two worker nodes. I configured the network interfaces for these VMs with both NAT and Host-Only networking, assigned static IP addresses, and set up a local DNS for internal name resolution. Additionally, I configured firewalls on each VM to enhance the overall security of the environment.
+
+   For container networking, I implemented Calico as the Container Network Interface (CNI) solution, which provides efficient IP address management and network policy enforcement. As flannel fail to manage cross pod communication. I deployed two applications with replicas to ensure fault tolerance and load balancing. To manage incoming traffic and provide reverse proxy functionality, I used Traefik as the ingress controller. I configured centralized TLS/HTTPS encryption with self-signed certificates through Traefik, securing communication across the cluster.
+
+To streamline application deployment and management, I installed Helm. I also used Cert Manager to handle the installation and management of Rancher Server via Helm.
+
+<br/>
+
+<h2 id="technologies">☄️ Technologies</h2>
+
+### Operating System
+
+&nbsp; [![DEBIAN](https://img.shields.io/badge/Debian-A81D33?style=for-the-badge&logo=debian&logoColor=white)](https://www.debian.org/)
+
+### Virtualization
+
+&nbsp; [![VIRTUALBOX](https://img.shields.io/badge/VirtualBox-%231867d0.svg?style=for-the-badge&logo=virtualbox&logoColor=white)](https://virtualbox.org/)
+
+### DevOps
+
+&nbsp; [![Kubernetes](https://img.shields.io/badge/Kubernetes-3069DE?style=for-the-badge&logo=kubernetes&logoColor=white)](https://kubernetes.io/)
+
+&nbsp; [![K3S](https://img.shields.io/badge/K3S-FFC61C?style=for-the-badge&logo=k3s&logoColor=black)](https://kubernetes.io/)
+
+&nbsp; [![RANCHER](https://img.shields.io/badge/Rancher-0075A8?style=for-the-badge&logo=rancher&logoColor=white)](https://www.rancher.com/)
+
+&nbsp; [![CALICO](https://img.shields.io/badge/CALICO-E34C26?style=for-the-badge&logoColor=black)](https://www.projectcalico.org/)
+
+&nbsp; [![Traefik](https://img.shields.io/badge/Traefik-24A1C1?style=for-the-badge&logo=traefikproxy&logoColor=black)](https://traefik.io/)
+
+&nbsp; [![Helm](https://img.shields.io/badge/Helm-0F1689?style=for-the-badge&logo=Helm&labelColor=0F1689)](https://helm.sh/)
+
+&nbsp; [![CoreDNS](https://img.shields.io/badge/CoreDNS-%233991e1.svg?style=for-the-badge&logo=coredns&logoColor=white)](https://coredns.io/)
+
+&nbsp; [![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
+
+### Web Server
+
+&nbsp; [![Nginx](https://img.shields.io/badge/nginx-%23009639.svg?style=for-the-badge&logo=nginx&logoColor=white)](https://www.nginx.com/)
+
+<br/>
+
+<h2 id="features">🔥 Features</h2>
+
++ **K3s Cluster Deployment:** Lightweight Kubernetes cluster deployed using K3s.
++ **Calico CNI:** Efficient IP address management and network policy enforcement using Calico as the Container Network Interface.
++ **Network Adapter Setup:** VMs configured with both NAT and Host-Only networking for isolated lab environment.
++ **Static IP Configuration:** Static IP addresses assigned to each VM for stable networking within the cluster.
++ **Local DNS:** Local DNS setup for internal name resolution across the Kubernetes cluster.
++ **Ingress Controller:** Traefik used as the ingress controller for reverse proxy functionality.
++ **TLS/HTTPS:** Centralized TLS/HTTPS encryption for all services using self-signed certificates through Traefik.
++ **Fault Tolerance & Load Balancing:** Applications deployed with replicas to ensure fault tolerance and effective load balancing.
++ **Helm Integration:** Helm installed to simplify the deployment and management of Kubernetes applications.
++ **Rancher Server Management:** Rancher Server installed and managed via Helm for centralized Kubernetes cluster management.
++ **Firewall Security:** Firewalls configured on each VM to enhance overall security of the Kubernetes environment.
+
+<br/>
+
+<h2 id="prerequisites">🔒 Prerequisites</h2>
+
+VirtualBox must be installed on your local machine to create and manage the VMs required for the Kubernetes cluster setup.
+
+<br/>
+
+<h2 id="system-startup">🚀 System Startup</h2> 
+
+### VMs Setup
+Create four VMs named k3s1 to k3s4. Configure the master nodes (k3s1 and k3s2) with 2 CPUs and 2GB RAM each, and the worker nodes (k3s3 and k3s4) with 1 CPU and 512MB RAM each.
+
+<br/>
+
+### SSH Configuration
+Modify the `/etc/ssh/sshd_config` file to enable root login via SSH.
 ```
 PermitRootLogin yes
 ```
 
 <br/>
--------------------------------------------------------------------------------------------------------------
 
 ### Configure Network Devices
-For stable kubernetes cluster installation and runtime on reboot we need to set static ip addresses to VMs.
-So that we will add network devices to VMs.
-Check detailed configuration from `/assets/guide/network-configuration`.
+
+To ensure a stable Kubernetes cluster installation and proper functionality after a reboot, static IP addresses need to be assigned to the VMs. This requires adding network devices to the VMs.
+For detailed configuration instructions, refer to `/assets/guide/network-configuration`.
 
 <br/>
--------------------------------------------------------------------------------------------------------------
 
-### Connect VM via SSH
-Password is `toor`.
+### Connect VMs via SSH
+Use the password `toor` to log in.
 
-#### s3k1
+#### k3s1
 ```
 ssh -p 3021 root@localhost
 ```
 
-#### s3k2
+#### k3s2
 ```
 ssh -p 3022 root@localhost
 ```
 
-#### s3k3
+#### k3s3
 ```
 ssh -p 3023 root@localhost
 ```
 
-#### s3k4
+#### k3s4
 ```
 ssh -p 3024 root@localhost
 ```
 
-toor
-clear
-
 <br/>
--------------------------------------------------------------------------------------------------------------
 
-### Update Upgrade and install Required tools
+
+### Update, Upgrade, and Install Required Tools
 ```
 apt update && apt upgrade -y
 apt install curl git ufw -y
 ```
 
 <br/>
--------------------------------------------------------------------------------------------------------------
 
-### Install k3s to Nodes
-These are how installing k3s to nodes. Explanation of the parameters as follows:
-`--flannel-backend=none`: Do not install flannel as default.
-`--disable-network-policy`: Do not use network policy which flannel provide.
+### Install k3s on Nodes
+Follow these steps to install k3s on the nodes. The parameters are explained below:
 
-#### k3s1 (master, server)
-After installation on k3s1 install Calico.
+* `--flannel-backend=none`: Prevents the installation of Flannel as the default CNI.
+* `--disable-network-policy`: Disables network policies that are typically provided by Flannel.
+
+#### k3s1 (Master, Server)
 ```
 curl -sfL https://get.k3s.io | K3S_TOKEN=MTOKEN sh -s - server --cluster-init --node-ip 192.168.56.31 --flannel-backend=none --disable-network-policy
 ```    
+After installation on k3s1 install Calico as stated in the next step.
 
-##### k3s-2 (master, server)
+##### k3s2 (Master, Server)
 ```
 curl -sfL https://get.k3s.io | K3S_TOKEN=MTOKEN sh -s - server --server https://192.168.56.31:6443 --node-ip 192.168.56.32 --flannel-backend=none --disable-network-policy
 ```
 
-##### k3s-3 (worker, agent)
+##### k3s3 (Worker, Agent)
 ```
 curl -sfL https://get.k3s.io | K3S_TOKEN=MTOKEN sh -s - agent --server https://192.168.56.31:6443 --node-ip 192.168.56.33
 ```
 
-##### k3s-4 (worker, agent)
+##### k3s4 (Worker, Agent)
 ```
 curl -sfL https://get.k3s.io | K3S_TOKEN=MTOKEN sh -s - agent --server https://192.168.56.31:6443 --node-ip 192.168.56.34
 ```
 
 <br/>
--------------------------------------------------------------------------------------------------------------
 
 ### Install Calico
-As flannel cannot handle pod connectivity between different nodes I prefer to use Calico. Lets install Calico on k3s1.
+Since Flannel cannot manage pod connectivity across different nodes, we will use Calico instead. To install Calico on k3s1, run the following command:
 ```
 kubectl apply -f https://raw.githubusercontent.com/projectcalico/calico/v3.25.1/manifests/calico.yaml
 ```
 
 <br/>
--------------------------------------------------------------------------------------------------------------
 
 ### Clone Project to k3s1 Master Node
 ```
@@ -101,11 +184,9 @@ cd /root
 git clone https://github.com/ahmettoguz/k3s-kubernetes-homelab
 ```
 
-clear
 <br/>
--------------------------------------------------------------------------------------------------------------
 
-### Run Kubernetes
+### Run Kubernetes and Deploy Application
 ```
 cd /root/k3s-kubernetes-homelab/src/kubernetes
 kubectl apply -f app.yml
@@ -117,34 +198,28 @@ cd /root/k3s-kubernetes-homelab/src/traefik
 kubectl apply -f ingress.yml
 ```
 
-clear
 <br/>
--------------------------------------------------------------------------------------------------------------
 
 ### Configure Local DNS
-add that 2 line at the end of the file:
-Linux: `/etc/hosts`
-Windows: `C:\Windows\System32\drivers\etc\hosts`
+Add the following two lines to the end of the file:
+For Linux: `/etc/hosts`
+For Windows: `C:\Windows\System32\drivers\etc\hosts`
 ```
 192.168.56.31 www.bugday.org
 192.168.56.31 www.ctis486.com
 ```
 
-clear
 <br/>
--------------------------------------------------------------------------------------------------------------
 
-### Client Request with CMD
+### Client Request Using CMD
 ```
 curl -s -k https://www.bugday.org
 curl -s -k https://www.ctis486.com
 ```
 
-clear
 <br/>
--------------------------------------------------------------------------------------------------------------
 
-#### Helm Installation on k3s1
+### Helm Installation on k3s1
 ```
 curl -fsSL https://get.helm.sh/helm-v3.11.1-linux-amd64.tar.gz -o helm.tar.gz
 tar -zxvf helm.tar.gz
@@ -154,19 +229,15 @@ rm -r linux-amd64
 helm version
 ```
 
-clear
 <br/>
--------------------------------------------------------------------------------------------------------------
 
-### Cert Manager (CRD)
+### Cert Manager (CRD) Installation
 ```
 curl -LO https://github.com/cert-manager/cert-manager/releases/download/v1.11.0/cert-manager.crds.yaml
 kubectl  apply -f cert-manager.crds.yaml
 ```
 
-clear
 <br/>
--------------------------------------------------------------------------------------------------------------
 
 #### Rancher Installation
 ```
@@ -202,19 +273,19 @@ http://192.168.1.21:31530
 
 
 ### Apply Firewall
-
-Allow API server communication (port 6443)
-Allow kubelet read-only API (port 10255)
-Allow communication between kubelet and master node (port 10250)
-Allow kube-proxy (port 10256)
-Allow CoreDNS DNS resolution (port 53, 9153)
-Allow etcd (port range 2379-2380)
-Allow NodePort services (port range 30000-32767)
-Allow VXLAN encapsulation (port 4789)
-Allow Calico control plane communication (port 5473)
-Allow SSH (port 22)
-Allow HTTP (port 80)
-Allow HTTPS (port 443)
+The following firewall rules should be applied to ensure secure communication and proper functioning of your Kubernetes cluster:
+* `Port 6443:` Allow API server communication
+* `Port 10255:` Allow kubelet read-only API
+* `Port 10250:` Allow communication between kubelet and master node
+* `Port 10256:` Allow kube-proxy
+* `Port 53, 9153:` Allow CoreDNS DNS resolution
+* `Port range 2379-2380:` Allow etcd
+* `Port range 30000-32767:` Allow NodePort services
+* `Port 4789:` Allow VXLAN encapsulation
+* `Port 5473:` Allow Calico control plane communication
+* `Port 22:` Allow SSH
+* `Port 80:` Allow HTTP
+* `Port 443:` Allow HTTPS
 
 ```
 ufw allow 6443/tcp
@@ -233,3 +304,11 @@ ufw allow 22/tcp
 
 ufw enable
 ```
+
+<br/>
+
+<h2 id="contributors">👥 Contributors</h2> 
+
+<a href="https://github.com/ahmettoguz" target="_blank"><img width=60 height=60 src="https://avatars.githubusercontent.com/u/101711642?v=4"></a> 
+
+### [🔝](#top)
