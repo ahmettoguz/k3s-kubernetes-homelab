@@ -1,9 +1,9 @@
-<h1 id="top" align="center">K3s Kubernetes <br/> Homelab</h1> 
+<h1 id="top" align="center">K3s Kubernetes Homelab</h1> 
 
 <br>
 
 <div align="center">
-    <img height=300 src="assets/banner1.png">
+    <img height=400 src="assets/banner1.png">
 </div>
 
 <br>
@@ -176,7 +176,6 @@ Since Flannel cannot manage pod connectivity across different nodes, we will use
 kubectl apply -f https://raw.githubusercontent.com/projectcalico/calico/v3.25.1/manifests/calico.yaml
 ```
 
-burada kaldım
 <br/>
 
 ### Clone Project to k3s1 Master Node
@@ -185,11 +184,9 @@ cd /root
 git clone https://github.com/ahmettoguz/k3s-kubernetes-homelab
 ```
 
-clear
 <br/>
--------------------------------------------------------------------------------------------------------------
 
-### Run Kubernetes
+### Run Kubernetes and Deploy Application
 ```
 cd /root/k3s-kubernetes-homelab/src/kubernetes
 kubectl apply -f app.yml
@@ -201,34 +198,28 @@ cd /root/k3s-kubernetes-homelab/src/traefik
 kubectl apply -f ingress.yml
 ```
 
-clear
 <br/>
--------------------------------------------------------------------------------------------------------------
 
 ### Configure Local DNS
-add that 2 line at the end of the file:
-Linux: `/etc/hosts`
-Windows: `C:\Windows\System32\drivers\etc\hosts`
+Add the following two lines to the end of the file:
+For Linux: `/etc/hosts`
+For Windows: `C:\Windows\System32\drivers\etc\hosts`
 ```
 192.168.56.31 www.bugday.org
 192.168.56.31 www.ctis486.com
 ```
 
-clear
 <br/>
--------------------------------------------------------------------------------------------------------------
 
-### Client Request with CMD
+### Client Request Using CMD
 ```
 curl -s -k https://www.bugday.org
 curl -s -k https://www.ctis486.com
 ```
 
-clear
 <br/>
--------------------------------------------------------------------------------------------------------------
 
-#### Helm Installation on k3s1
+### Helm Installation on k3s1
 ```
 curl -fsSL https://get.helm.sh/helm-v3.11.1-linux-amd64.tar.gz -o helm.tar.gz
 tar -zxvf helm.tar.gz
@@ -238,19 +229,15 @@ rm -r linux-amd64
 helm version
 ```
 
-clear
 <br/>
--------------------------------------------------------------------------------------------------------------
 
-### Cert Manager (CRD)
+### Cert Manager (CRD) Installation
 ```
 curl -LO https://github.com/cert-manager/cert-manager/releases/download/v1.11.0/cert-manager.crds.yaml
 kubectl  apply -f cert-manager.crds.yaml
 ```
 
-clear
 <br/>
--------------------------------------------------------------------------------------------------------------
 
 #### Rancher Installation
 ```
@@ -286,19 +273,19 @@ http://192.168.1.21:31530
 
 
 ### Apply Firewall
-
-Allow API server communication (port 6443)
-Allow kubelet read-only API (port 10255)
-Allow communication between kubelet and master node (port 10250)
-Allow kube-proxy (port 10256)
-Allow CoreDNS DNS resolution (port 53, 9153)
-Allow etcd (port range 2379-2380)
-Allow NodePort services (port range 30000-32767)
-Allow VXLAN encapsulation (port 4789)
-Allow Calico control plane communication (port 5473)
-Allow SSH (port 22)
-Allow HTTP (port 80)
-Allow HTTPS (port 443)
+The following firewall rules should be applied to ensure secure communication and proper functioning of your Kubernetes cluster:
+* `Port 6443:` Allow API server communication
+* `Port 10255:` Allow kubelet read-only API
+* `Port 10250:` Allow communication between kubelet and master node
+* `Port 10256:` Allow kube-proxy
+* `Port 53, 9153:` Allow CoreDNS DNS resolution
+* `Port range 2379-2380:` Allow etcd
+* `Port range 30000-32767:` Allow NodePort services
+* `Port 4789:` Allow VXLAN encapsulation
+* `Port 5473:` Allow Calico control plane communication
+* `Port 22:` Allow SSH
+* `Port 80:` Allow HTTP
+* `Port 443:` Allow HTTPS
 
 ```
 ufw allow 6443/tcp
