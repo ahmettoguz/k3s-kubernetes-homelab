@@ -29,209 +29,153 @@ To streamline application deployment and management, I installed Helm. I also us
 
 <h2 id="technologies">☄️ Technologies</h2>
 
+### Operating System
+
+&nbsp; [![DEBIAN](https://img.shields.io/badge/Debian-A81D33?style=for-the-badge&logo=debian&logoColor=white)](https://www.debian.org/)
+
+### Virtualization
+
+&nbsp; [![VIRTUALBOX](https://img.shields.io/badge/VirtualBox-%231867d0.svg?style=for-the-badge&logo=virtualbox&logoColor=white)](https://virtualbox.org/)
+
 ### DevOps
+
+&nbsp; [![Kubernetes](https://img.shields.io/badge/Kubernetes-3069DE?style=for-the-badge&logo=kubernetes&logoColor=white)](https://kubernetes.io/)
+
+&nbsp; [![K3S](https://img.shields.io/badge/K3S-FFC61C?style=for-the-badge&logo=k3s&logoColor=black)](https://kubernetes.io/)
+
+&nbsp; [![RANCHER](https://img.shields.io/badge/Rancher-0075A8?style=for-the-badge&logo=rancher&logoColor=white)](https://www.rancher.com/)
+
+&nbsp; [![CALICO](https://img.shields.io/badge/CALICO-E34C26?style=for-the-badge&logoColor=black)](https://www.projectcalico.org/)
+
+&nbsp; [![Traefik](https://img.shields.io/badge/Traefik-24A1C1?style=for-the-badge&logo=traefikproxy&logoColor=black)](https://traefik.io/)
+
+&nbsp; [![Helm](https://img.shields.io/badge/Helm-0F1689?style=for-the-badge&logo=Helm&labelColor=0F1689)](https://helm.sh/)
+
+&nbsp; [![CoreDNS](https://img.shields.io/badge/CoreDNS-%233991e1.svg?style=for-the-badge&logo=coredns&logoColor=white)](https://coredns.io/)
 
 &nbsp; [![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
 
-### Web
+### Web Server
 
-&nbsp; [![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)](https://www.java.com/)
-
-&nbsp; [![Spring](https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white)](https://spring.io/)
-
-&nbsp; [![Spring Boot](https://img.shields.io/badge/Spring_Boot-F2F4F9?style=for-the-badge&logo=spring-boot)](https://spring.io/projects/spring-boot)
-
-&nbsp; [![Apache Tomcat](https://img.shields.io/badge/apache%20tomcat-%23F8DC75.svg?style=for-the-badge&logo=apache-tomcat&logoColor=black)](https://tomcat.apache.org/)
-
-&nbsp; [![Swagger](https://img.shields.io/badge/Swagger-85EA2D?style=for-the-badge&logo=Swagger&logoColor=white)](https://swagger.io/)
-
-### Test
-
-&nbsp; [![Postman](https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white)](https://www.postman.com/)
+&nbsp; [![Nginx](https://img.shields.io/badge/nginx-%23009639.svg?style=for-the-badge&logo=nginx&logoColor=white)](https://www.nginx.com/)
 
 <br/>
 
 <h2 id="features">🔥 Features</h2>
 
-+ **TLS/HTTPS:** Centeralized TLS/HTTPS support for all services with selfsigned certificate.
-+ **External Communication:** Manage communication with frontend.
-+ **Postman Endpoint Collection:** Postman collection added for ensure validation of all API endpoints.
-+ **Swagger Documentation:** Comprehensive API documentation integrated for documentation and testing purposes.
-+ **Environment Configuration:** Configurations have been adjusted for enhanced flexibility.
-+ **Dockerization:** The application is containerized for consistent deployment and scaling.
++ **K3s Cluster Deployment:** Lightweight Kubernetes cluster deployed using K3s.
++ **Calico CNI:** Efficient IP address management and network policy enforcement using Calico as the Container Network Interface.
++ **Network Adapter Setup:** VMs configured with both NAT and Host-Only networking for isolated lab environment.
++ **Static IP Configuration:** Static IP addresses assigned to each VM for stable networking within the cluster.
++ **Local DNS:** Local DNS setup for internal name resolution across the Kubernetes cluster.
++ **Ingress Controller:** Traefik used as the ingress controller for reverse proxy functionality.
++ **TLS/HTTPS:** Centralized TLS/HTTPS encryption for all services using self-signed certificates through Traefik.
++ **Fault Tolerance & Load Balancing:** Applications deployed with replicas to ensure fault tolerance and effective load balancing.
++ **Helm Integration:** Helm installed to simplify the deployment and management of Kubernetes applications.
++ **Rancher Server Management:** Rancher Server installed and managed via Helm for centralized Kubernetes cluster management.
++ **Firewall Security:** Firewalls configured on each VM to enhance overall security of the Kubernetes environment.
 
 <br/>
 
 <h2 id="prerequisites">🔒 Prerequisites</h2>
 
-VirtualBox must be installed on your local machine to create and manage the virtual machines required for the Kubernetes cluster setup.
-
-<br/>
-
-* Go to your Google Account settings at [`myaccount.google.com`](https://myaccount.google.com/).
-* In the navigation panel, select [`Security`](https://myaccount.google.com/security).
-* Under `How you sign in to Google`, select `2-Step Verification`.
-* Add your phone number as a verification method.
-* Go to  [`myaccount.google.com/u/1/apppasswords`](https://myaccount.google.com/u/1/apppasswords) and generate a new app password.
+VirtualBox must be installed on your local machine to create and manage the VMs required for the Kubernetes cluster setup.
 
 <br/>
 
 <h2 id="system-startup">🚀 System Startup</h2> 
 
-<h3 id="developer-mode">🧪 Developer Mode</h3>
-
-* Place credentials in the `application-dev.properties` file.
-
-<br/>
-
-#### Using command line
-
-```
-mvnw spring-boot:run
-```
-
-#### Using Docker
-
-```
-docker build -t micro-email-image .
-
-docker run -d -p 8082:80 --name micro-email-container micro-email-image
-
-docker ps -a
-
-docker rm -f micro-email-container
-```
+### VMs Setup
+Create four VMs named k3s1 to k3s4. Configure the master nodes (k3s1 and k3s2) with 2 CPUs and 2GB RAM each, and the worker nodes (k3s3 and k3s4) with 1 CPU and 512MB RAM each.
 
 <br/>
 
-<h3 id="production-mode">⚡Production Mode</h3> 
-
-* Copy `application-dev.properties` to create `application-prod.properties`.
-* Change `app.var.appMode` to `prod`.
-* Change `server.port` to `80`.
-* Place credentials.
-* Follow the instructions in the [`Micro-Docker-Config repository`](https://github.com/ahmettoguz/Micro-Docker-Config) to configure Docker for production.
-
-<br/>
-
-<h2 id="endpoint-documentation">📍 Endpoint Documentation</h2>
-You can access the full API documentation using Swagger UI.
-
-To view the documentation visit: [`sw/swagger-ui/index.html`](https://email.localhost/sw/swagger-ui/index.html)
-
-![endpoint-doc](src/main/resources/assets/endpoint-doc/endpoint-doc.png)
-
-<br/>
-
-<h2 id="contributors">👥 Contributors</h2> 
-
-<a href="https://github.com/ahmettoguz" target="_blank"><img width=60 height=60 src="https://avatars.githubusercontent.com/u/101711642?v=4"></a> 
-
-### [🔝](#top)
-
-
-
-
-
-
-_______________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
-
-# k3s-kubernetes-homelab
-
-Create 4 VMs as k3s1 to k3s4.
-
-### SSH
-Configure `/etc/ssh/sshd_config` to be able to login as root.
+### SSH Configuration
+Modify the `/etc/ssh/sshd_config` file to enable root login via SSH.
 ```
 PermitRootLogin yes
 ```
 
 <br/>
--------------------------------------------------------------------------------------------------------------
 
 ### Configure Network Devices
-For stable kubernetes cluster installation and runtime on reboot we need to set static ip addresses to VMs.
-So that we will add network devices to VMs.
-Check detailed configuration from `/assets/guide/network-configuration`.
+
+To ensure a stable Kubernetes cluster installation and proper functionality after a reboot, static IP addresses need to be assigned to the VMs. This requires adding network devices to the VMs.
+For detailed configuration instructions, refer to `/assets/guide/network-configuration`.
 
 <br/>
--------------------------------------------------------------------------------------------------------------
 
-### Connect VM via SSH
-Password is `toor`.
+### Connect VMs via SSH
+Use the password `toor` to log in.
 
-#### s3k1
+#### k3s1
 ```
 ssh -p 3021 root@localhost
 ```
 
-#### s3k2
+#### k3s2
 ```
 ssh -p 3022 root@localhost
 ```
 
-#### s3k3
+#### k3s3
 ```
 ssh -p 3023 root@localhost
 ```
 
-#### s3k4
+#### k3s4
 ```
 ssh -p 3024 root@localhost
 ```
 
-toor
-clear
-
 <br/>
--------------------------------------------------------------------------------------------------------------
 
-### Update Upgrade and install Required tools
+
+### Update, Upgrade, and Install Required Tools
 ```
 apt update && apt upgrade -y
 apt install curl git ufw -y
 ```
 
 <br/>
--------------------------------------------------------------------------------------------------------------
 
-### Install k3s to Nodes
-These are how installing k3s to nodes. Explanation of the parameters as follows:
-`--flannel-backend=none`: Do not install flannel as default.
-`--disable-network-policy`: Do not use network policy which flannel provide.
+### Install k3s on Nodes
+Follow these steps to install k3s on the nodes. The parameters are explained below:
 
-#### k3s1 (master, server)
-After installation on k3s1 install Calico.
+* `--flannel-backend=none`: Prevents the installation of Flannel as the default CNI.
+* `--disable-network-policy`: Disables network policies that are typically provided by Flannel.
+
+#### k3s1 (Master, Server)
 ```
 curl -sfL https://get.k3s.io | K3S_TOKEN=MTOKEN sh -s - server --cluster-init --node-ip 192.168.56.31 --flannel-backend=none --disable-network-policy
 ```    
+After installation on k3s1 install Calico as stated in the next step.
 
-##### k3s-2 (master, server)
+##### k3s2 (Master, Server)
 ```
 curl -sfL https://get.k3s.io | K3S_TOKEN=MTOKEN sh -s - server --server https://192.168.56.31:6443 --node-ip 192.168.56.32 --flannel-backend=none --disable-network-policy
 ```
 
-##### k3s-3 (worker, agent)
+##### k3s3 (Worker, Agent)
 ```
 curl -sfL https://get.k3s.io | K3S_TOKEN=MTOKEN sh -s - agent --server https://192.168.56.31:6443 --node-ip 192.168.56.33
 ```
 
-##### k3s-4 (worker, agent)
+##### k3s4 (Worker, Agent)
 ```
 curl -sfL https://get.k3s.io | K3S_TOKEN=MTOKEN sh -s - agent --server https://192.168.56.31:6443 --node-ip 192.168.56.34
 ```
 
 <br/>
--------------------------------------------------------------------------------------------------------------
 
 ### Install Calico
-As flannel cannot handle pod connectivity between different nodes I prefer to use Calico. Lets install Calico on k3s1.
+Since Flannel cannot manage pod connectivity across different nodes, we will use Calico instead. To install Calico on k3s1, run the following command:
 ```
 kubectl apply -f https://raw.githubusercontent.com/projectcalico/calico/v3.25.1/manifests/calico.yaml
 ```
 
+burada kaldım
 <br/>
--------------------------------------------------------------------------------------------------------------
 
 ### Clone Project to k3s1 Master Node
 ```
@@ -371,3 +315,11 @@ ufw allow 22/tcp
 
 ufw enable
 ```
+
+<br/>
+
+<h2 id="contributors">👥 Contributors</h2> 
+
+<a href="https://github.com/ahmettoguz" target="_blank"><img width=60 height=60 src="https://avatars.githubusercontent.com/u/101711642?v=4"></a> 
+
+### [🔝](#top)
