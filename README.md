@@ -3,8 +3,10 @@
 <br>
 
 <div align="center">
-    <img width=300 src="assets/banner.png">
+    <img height=300 src="assets/banner1.png">
 </div>
+
+<br>
 
 ## 🔍 Table of Contents
 
