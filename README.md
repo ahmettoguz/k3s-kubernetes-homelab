@@ -202,8 +202,8 @@ kubectl apply -f ingress.yml
 
 ### Configure Local DNS
 Add the following two lines to the end of the file:
-For Linux: `/etc/hosts`
-For Windows: `C:\Windows\System32\drivers\etc\hosts`
+* For Linux: `/etc/hosts`
+* For Windows: `C:\Windows\System32\drivers\etc\hosts`
 ```
 192.168.56.31 www.bugday.org
 192.168.56.31 www.ctis486.com
